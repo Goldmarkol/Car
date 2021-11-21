@@ -24,9 +24,36 @@ Car.prototype.draw = function () {
   $("body").append(this.carElement);
 };
 
-Car.prototype.moveRight = function () {
-  this.x += 5;
-  
+Car.prototype.moveRight = function (speed) {
+  this.x += speed;
+
+  this.carElement.css({
+    left: this.x,
+    top: this.y,
+  });
+};
+
+Car.prototype.moveLeft = function (speed) {
+  this.x -= speed;
+
+  this.carElement.css({
+    left: this.x,
+    top: this.y,
+  });
+};
+
+Car.prototype.moveTop = function (speed) {
+  this.y -= speed;
+
+  this.carElement.css({
+    left: this.x,
+    top: this.y,
+  });
+};
+
+Car.prototype.moveDown = function (speed) {
+  this.y += speed;
+
   this.carElement.css({
     left: this.x,
     top: this.y,
@@ -36,6 +63,11 @@ Car.prototype.moveRight = function () {
 // Используется конструктор для создания двух объектов
 let tesla = new Car(20, 20);
 let nissan = new Car(100, 200);
+
+setInterval(() => {
+  nissan.moveRight(Math.random() * 5);
+  tesla.moveRight(Math.random() * 5);
+}, 40);
 
 tesla.draw();
 nissan.draw();
